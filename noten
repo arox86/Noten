@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX 256
+#define TIME 5000
+
+//Variablen
+unsigned int note = 0;
+int alleNoten[MAX];
+unsigned counter = 0;
+unsigned selection =0;
+
+//Funktion zum einlesen der Noten
+void notenEingabe()
+{
+	//Dateneingabe (Noten)
+	printf("Bitte Note eingeben: \n");
+	scanf("%i",&note);
+
+	if( note < 1 || note > 6)
+	{
+		printf("Nur Zahlen von 1 bis 6 erlaubt: \n"); // Prüft ob die Noten valide sind.
+	}
+	else 
+	{
+		printf("Sie haben eingeben: %i \n",note);
+		alleNoten[counter]=note; // schreibt in das Array die Noten
+		counter++;
+		note=0;
+	}
+		
+}
+
+void printNoten()
+{
+	double mittel=0;
+	printf("Ausgabe aller Noten: \n");
+	for(int i=0 ; i < counter ; i++)
+	{
+		
+		printf("Nummer: %i Note: %d\n",i,alleNoten[i]);
+		mittel = (mittel+ alleNoten[i]);
+		
+	}
+	printf("Durchschnitt: %.2f \n",(mittel/counter));
+}
+
+// Anzeige des Hauptmenüs
+void printMenu()
+{
+	printf("\t *** Hauptmenu *** Programm *** Noteneingabe ***\n\n");
+
+	printf("Bitte Eingabe machen: [1 - 3]\n");
+	printf("[1] Noteneingabe \n");
+	printf("[2] Alle Noten anzeigen \n");
+	printf("[3] Beenden \n");
+}
+
+void selectMenu(int selection)
+{
+	if(selection == 1)
+	{
+		notenEingabe();
+		
+	}
+	if(selection == 2)
+	{
+		printNoten();
+	}
+	if(selection == 3)
+	{
+		printf("Aufwiedersehen !\n");
+	}
+}
+
+void initProgramm()
+{	
+	
+	printMenu();
+	scanf("%d",&selection);
+	selectMenu(selection);
+}
+
+// Hauptprogramm
+void main()
+{
+	
+	do 
+	{	
+		initProgramm();
+
+	} while(selection != 3);
+
+}
+	
+	
